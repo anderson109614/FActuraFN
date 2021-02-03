@@ -1,0 +1,300 @@
+<div class="row">
+    <div class="col-md-8">
+        <div class="card card-user">
+          <div class="card-header">
+              <div class="row">
+                  <div class="col-md-5">
+                    <h5 class="card-title">Cliente</h5>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="update ml-auto mr-auto">
+                        <button type="submit" class="btn btn-primary btn-round"
+                        data-toggle="modal"
+                            data-target="#ModaClientes"
+                        >Cargar Cliente</button>
+                      </div>
+                </div>
+              </div>
+            
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+               
+                <div class="col-md-5 pr-1">
+                  <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" disabled="" placeholder="Nombre" value="{{clienteUso.Name}} " >
+                  </div>
+                </div>
+                <div class="col-md-5 pr-1">
+                    <div class="form-group">
+                      <label>Zip Code</label>
+                      <input type="text" class="form-control" disabled="" placeholder="Nombre" value="{{clienteUso.ZipCode}} " >
+                    </div>
+                  </div>
+                
+              </div>
+              <div class="row">
+                <div class="col-md-10 pr-1">
+                  <div class="form-group">
+                    <label>Direcion</label>
+                    <input type="text" class="form-control" disabled="" placeholder="Direcion" value="{{clienteUso.Address}} ">
+                  </div>
+                </div>
+               
+              </div>
+              
+              
+            </form>
+            
+          </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card card-user">
+          <div class="card-header">
+              <div class="row">
+                  <div class="col-md-5">
+                    <h5 class="card-title">Productos</h5>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="update ml-auto mr-auto">
+                        <button type="submit" class="btn btn-primary btn-round"
+                        data-toggle="modal"
+                            data-target="#ModaProductos"
+                        >Selecionar Producto</button>
+                      </div>
+                </div>
+              </div>
+            
+          </div>
+          <div class="card-body">
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table ">
+                    <thead class=" text-primary ">
+                        <th >
+                           Producto
+                        </th>
+                        <th>
+                            Cantidad
+                        </th>
+                        <th>
+                            P.Unitario
+                        </th>
+                        <th>
+                            Sub.Total
+                        </th>
+                       
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Producto of listaProductosSelecionados">
+                            <td>
+                                {{Producto.producto.Description}}
+                            </td>
+                            <td>
+                                {{Producto.cantida}}
+                            </td>
+                            <td>
+                                {{Producto.producto.UnitPrice}} $
+                            </td>
+                            <td>
+                                {{Producto.subtota}} $
+                            </td>
+                            
+                           
+                            <td >
+                                <button class="btn btn-sm btn-outline-success btn-round btn-icon"
+                                    (click)="eliminarProSel(Producto)"
+                                    
+                                    >
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+
+                            </td>
+                        </tr>
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+
+                </div>  
+                <div class="col-md-4 pr-1" >
+                    <div class="form-group">
+                      <label>Sub. Total</label>
+                      <input type="text" style="text-align: right;" class="form-control" disabled="" placeholder="Nombre" value="{{SubTotal}} $" >
+                    </div>
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+
+                </div>  
+                <div class="col-md-4 pr-1" >
+                    <div class="form-group">
+                      <label>IVA</label>
+                      <input type="text" style="text-align: right;" class="form-control" disabled="" placeholder="Nombre" value="{{IVA}} $" >
+                    </div>
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+
+                </div>  
+                <div class="col-md-4 pr-1" >
+                    <div class="form-group">
+                      <label>Total</label>
+                      <input type="text" style="text-align: right;" class="form-control" disabled="" placeholder="Nombre" value="{{Total}} $" >
+                    </div>
+                  </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button type="submit" class="btn btn-primary btn-round" (click)='Guardar()'>Guardar</button>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Clientes -->
+<div class="modal fade" id="ModaClientes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Clientes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="search" class="form-control form-control-warning" (keyup)="checkClientes($event)"
+                        placeholder="Busqueda" id='inputBusquedaClientes'>
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table ">
+                            <thead class=" text-primary ">
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                
+                                
+                            </thead>
+                            <tbody>
+                                <!--*ngFor="let cliente of listaCliente"-->
+                                <tr *ngFor="let cliente of listaCliente">
+                                    <td>
+                                        {{cliente.CustomerID}}
+                                    </td>
+                                    <td>
+                                        {{cliente.Name}}
+                                    </td>
+                                    
+                                   
+                                    <td >
+                                        <button class="btn btn-sm btn-outline-success btn-round btn-icon"
+                                            data-toggle="modal" data-target="#ModaClientes"
+                                            (click)="selecClientes(cliente)"
+                                            data-dismiss="modal">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Productos -->
+<div class="modal fade" id="ModaProductos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Productos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="search" class="form-control form-control-warning" (keyup)="checkProductos($event)"
+                        placeholder="Busqueda" id='inputBusquedaProductos'>
+                        <input type="number" class="form-control form-control-warning" 
+                        placeholder="Cantidad" id='inputCantidadProductos' value="1">
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table ">
+                            <thead class=" text-primary ">
+                                <th>
+                                    Codigo
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                <th>
+                                    Precio Unitario
+                                </th>
+                                <th>
+                                    Cantidad
+                                </th>
+                                
+                                
+                            </thead>
+                            <tbody>
+                                <!--*ngFor="let Producto of listaProductosSelecionados" -->
+                                <tr *ngFor="let Producto of listaProductos">
+                                    <td>
+                                        {{Producto.ProductCode}}
+                                    </td>
+                                    <td>
+                                        {{Producto.Description}}
+                                    </td>
+                                    <td>
+                                        {{Producto.UnitPrice}}
+                                    </td>
+                                    <td>
+                                        {{Producto.OnHandQuantit}}
+                                    </td>
+                                    
+                                   
+                                    <td >
+                                        <button class="btn btn-sm btn-outline-success btn-round btn-icon"
+                                            
+                                            (click)="selecProducto(Producto)"
+                                         >
+                                            <i class="fa fa-check"></i>
+                                        </button>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
