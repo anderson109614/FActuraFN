@@ -174,7 +174,7 @@ export class FacturaComponent implements OnInit {
   Guardar() {
     let inv: Invoices = {
       CustomerID: this.clienteUso.CustomerID,
-      InvoiceDate: '',
+      InvoiceDate: '0',
       InvoiceTotal: this.Total.toString(),
       ProductTotal: this.SubTotal.toString(),
       SalesTax: this.IVA.toString(),
