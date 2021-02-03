@@ -47,20 +47,21 @@ export class FacturaComponent implements OnInit {
 
   }
   cragarProductos() {
+    /*
     let p1: Producto = { Description: 'Pan', OnHandQuantit: '3', ProductCode: '1', UnitPrice: '5', };
     let p2: Producto = { Description: 'Queso', OnHandQuantit: '5', ProductCode: '2', UnitPrice: '7', };
     this.listaProductos.push(p1);
     this.listaProductos.push(p2);
     this.listaProductosAux = this.listaProductos;
-    /*
-    this.proSEr.getClientes().subscribe(res => {
+    */
+    this.proSEr.getProductos().subscribe(res => {
       this.listaCliente = res;
       this.listaClienteAux = res;
     },
       err => {
  
       });
-      */
+      
   }
   checkClientes($event: KeyboardEvent) {
     this.listaCliente = this.listaClienteAux;
@@ -71,7 +72,7 @@ export class FacturaComponent implements OnInit {
           */
     if (value != "") {
       const result = this.listaCliente.filter((estudianteB: Cliente) => estudianteB.Name.search(value) >= 0
-        || estudianteB.CustomerID.toUpperCase().search(value.toUpperCase()) >= 0
+        
         || estudianteB.Address.toUpperCase().search(value.toUpperCase()) >= 0
         || estudianteB.City.toUpperCase().search(value.toUpperCase()) >= 0
         || estudianteB.State.toUpperCase().search(value.toUpperCase()) >= 0);
