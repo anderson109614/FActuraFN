@@ -15,7 +15,7 @@ export class ProductosService {
     return this.http.get(this.ip+'Customer');
   }
   GuardarCabecera(inv:Invoices){
-    return this.http.post<number>(this.ip+'Invoices',inv);
+    return this.http.post<string>(this.ip+'Invoices',inv);
   }
   GuardarDetalles(inv:any){
     return this.http.post<boolean>(this.ip+'InvoiceItems',inv);

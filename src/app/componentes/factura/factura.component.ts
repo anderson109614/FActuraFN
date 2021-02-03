@@ -184,8 +184,8 @@ export class FacturaComponent implements OnInit {
 
     if (this.validar(inv)) {
       this.proSEr.GuardarCabecera(inv).subscribe(res => {
-        if (res != -1) {
-          this.guardarDetalles(res);
+        if (res != "-1") {
+          this.guardarDetalles(Number.parseInt(res));
         } else {
           alert('Error al guardar la Factura')
         }
