@@ -178,7 +178,7 @@ export class FacturaComponent implements OnInit {
       InvoiceTotal: this.Total.toString(),
       ProductTotal: this.SubTotal.toString(),
       SalesTax: this.IVA.toString(),
-      Shipping: ''
+      Shipping: '0'
     }
 
 
